@@ -88,7 +88,7 @@ export default function TrackPage() {
       {isLoadingAlbum && <p className="main-content-empty">Loading album…</p>}
 
       {!isLoadingAlbum && albumTracks.length > 0 && (
-        <Section title={`Album: ${track.album ?? track.title}`} tracks={albumTracks} layout="grid" />
+        <Section title={`Album: ${track.album ?? track.title}`} tracks={albumTracks} layout="list" />
       )}
     </PageShell>
   )

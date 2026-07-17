@@ -10,11 +10,36 @@
 }
 
 .player-track {
+  border: none;
+  background: none;
+  color: inherit;
+  text-align: left;
+  padding: 0;
   display: flex;
   align-items: center;
   gap: 12px;
   width: 260px;
   min-width: 0;
+}
+
+.player-track:disabled {
+  cursor: default;
+}
+
+.player-track:not(:disabled):hover {
+  color: #fff;
+}
+
+.player-track:not(:disabled):hover .player-track-arrow {
+  opacity: 1;
+}
+
+.player-track-arrow {
+  flex: 0 0 auto;
+  margin-left: 4px;
+  color: var(--text-muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
 }
 
 .player-track img {
@@ -98,4 +123,95 @@
   .player-spacer {
     display: none;
   }
+}
+
+.now-playing-backdrop {
+  position: fixed;
+  inset: 0;
+  bottom: var(--player-height);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 60;
+}
+
+.now-playing-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  max-width: 90vw;
+  background: linear-gradient(180deg, #232323, #0a0a0a);
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 32px;
+  animation: now-playing-slide-in 0.2s ease;
+}
+
+@keyframes now-playing-slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.now-playing-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.now-playing-close:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.now-playing-art {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+  margin-top: 24px;
+}
+
+.now-playing-title {
+  margin: 28px 0 4px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.now-playing-artist {
+  margin: 0;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.now-playing-controls {
+  margin-top: 36px;
+  gap: 30px;
+}
+
+.now-playing-controls button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.now-playing-controls .player-play-btn {
+  width: 44px;
+  height: 44px;
 }

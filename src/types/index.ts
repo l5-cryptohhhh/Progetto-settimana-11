@@ -20,6 +20,7 @@ export interface ArtistInfo {
   name: string
   photo: string | null
   bio: string | null
+  topTracks: Track[]
 }
 
 export interface Playlist {

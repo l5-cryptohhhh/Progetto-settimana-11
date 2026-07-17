@@ -6,10 +6,12 @@ interface SectionProps {
   title: string
   tracks: Track[]
   isLoading?: boolean
-  layout?: 'row' | 'grid'
+  layout?: 'row' | 'grid' | 'list'
   onAdd?: (track: Track) => void
   onRemove?: (track: Track) => void
 }
+
+const LAYOUT_CLASS = { row: 'section-row', grid: 'section-grid', list: 'section-list' } as const
 
 export default function Section({ title, tracks, isLoading, layout = 'row', onAdd, onRemove }: SectionProps) {
   if (!isLoading && tracks.length === 0) return null
@@ -17,7 +19,7 @@ export default function Section({ title, tracks, isLoading, layout = 'row', onAd
   return (
     <section className="section">
       {title && <h2 className="section-title">{title}</h2>}
-      <div className={layout === 'row' ? 'section-row' : 'section-grid'}>
+      <div className={LAYOUT_CLASS[layout]}>
         {isLoading && tracks.length === 0
           ? Array.from({ length: 6 }).map((_, i) => <div key={i} className="section-skeleton" />)
           : tracks.map((track) => (

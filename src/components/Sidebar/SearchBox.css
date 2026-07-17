@@ -18,18 +18,3 @@
 .search-box input:focus {
   outline: 2px solid var(--accent);
 }
-
-.search-box button {
-  border: none;
-  border-radius: 3px;
-  padding: 0 14px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  background: #2a2a2a;
-  color: #fff;
-}
-
-.search-box button:hover {
-  background: #3a3a3a;
-}

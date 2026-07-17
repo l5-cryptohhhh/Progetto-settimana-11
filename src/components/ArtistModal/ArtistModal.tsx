@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { closeArtist } from '../../features/artist/artistSlice'
 import { CloseIcon } from '../icons/Icons'
+import Section from '../Section/Section'
 import './ArtistModal.css'
 
 export default function ArtistModal() {
@@ -28,6 +29,11 @@ export default function ArtistModal() {
             )}
             <h2>{info.name}</h2>
             <p className="artist-modal-bio">{info.bio ?? 'No biography available for this artist.'}</p>
+            {info.topTracks.length > 0 && (
+              <div className="artist-modal-tracks">
+                <Section title="Popular" tracks={info.topTracks} layout="list" />
+              </div>
+            )}
           </>
         )}
       </div>

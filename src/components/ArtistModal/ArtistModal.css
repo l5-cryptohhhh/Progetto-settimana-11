@@ -74,3 +74,17 @@
   padding: 40px 0;
   color: var(--text-muted);
 }
+
+.artist-modal-tracks {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.artist-modal-tracks .section {
+  padding: 0;
+}
+
+.artist-modal-tracks .section-title {
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}

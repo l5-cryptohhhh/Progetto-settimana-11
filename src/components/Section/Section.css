@@ -33,6 +33,42 @@
   height: 8px;
 }
 
+.section-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.section-list .track-card {
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  gap: 14px;
+  padding: 6px 8px;
+  border-radius: 4px;
+}
+
+.section-list .track-card:hover {
+  background: var(--card-bg-hover);
+}
+
+.section-list .track-card-art {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+}
+
+.section-list .track-card-title {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.section-list .track-card-actions {
+  margin-top: 0;
+}
+
 .section-skeleton {
   width: 150px;
   height: 150px;

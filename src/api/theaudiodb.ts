@@ -13,7 +13,7 @@ interface AudioDbResponse {
   artists: AudioDbArtist[] | null
 }
 
-export async function fetchArtistInfo(name: string): Promise<ArtistInfo> {
+export async function fetchArtistInfo(name: string): Promise<Omit<ArtistInfo, 'topTracks'>> {
   const res = await fetch(BASE_URL + encodeURIComponent(name))
   if (!res.ok) throw new Error(`TheAudioDB request failed with status ${res.status}`)
   const data: AudioDbResponse = await res.json()

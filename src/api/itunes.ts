@@ -40,6 +40,14 @@ export async function searchItunesTracks(term: string, limit = 25): Promise<Trac
   return data.results.filter((r) => r.trackId).map(mapItunesTrack)
 }
 
+export async function searchArtistTopTracks(artistName: string, limit = 8): Promise<Track[]> {
+  const url = `${BASE_URL}/search?term=${encodeURIComponent(artistName)}&entity=song&attribute=artistTerm&limit=${limit}`
+  const res = await fetch(url)
+  if (!res.ok) throw new Error(`iTunes artist search failed with status ${res.status}`)
+  const data: ItunesResponse = await res.json()
+  return data.results.filter((r) => r.trackId).map(mapItunesTrack)
+}
+
 export async function lookupAlbumTracks(collectionId: number): Promise<Track[]> {
   const url = `${BASE_URL}/lookup?id=${collectionId}&entity=song`
   const res = await fetch(url)

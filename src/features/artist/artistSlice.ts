@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { fetchArtistInfo } from '../../api/theaudiodb'
+import { searchArtistTopTracks } from '../../api/itunes'
 import type { ArtistInfo, FetchStatus } from '../../types'
 
 interface ArtistState {
@@ -17,7 +18,11 @@ const initialState: ArtistState = {
 }
 
 export const openArtist = createAsyncThunk('artist/open', async (name: string) => {
-  return await fetchArtistInfo(name)
+  const [info, topTracks] = await Promise.all([
+    fetchArtistInfo(name),
+    searchArtistTopTracks(name).catch(() => []),
+  ])
+  return { ...info, topTracks }
 })
 
 const artistSlice = createSlice({

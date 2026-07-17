@@ -1,28 +1,31 @@
-import { useState, type FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAppDispatch } from '../../app/hooks'
-import { searchTracks } from '../../features/search/searchSlice'
-import { clearSearch } from '../../features/search/searchSlice'
+import { clearSearch, searchTracks } from '../../features/search/searchSlice'
 import './SearchBox.css'
 
 export default function SearchBox() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [value, setValue] = useState('')
 
-  function handleSubmit(e: FormEvent) {
-    e.preventDefault()
+  useEffect(() => {
     const term = value.trim()
-    if (term) {
-      dispatch(searchTracks(term))
-    } else {
+    if (!term) {
       dispatch(clearSearch())
+      return
     }
-    navigate('/search')
-  }
+    const timer = setTimeout(() => {
+      dispatch(searchTracks(term))
+      if (location.pathname !== '/search') navigate('/search')
+    }, 350)
+    return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value])
 
   return (
-    <form className="search-box" onSubmit={handleSubmit}>
+    <form className="search-box" onSubmit={(e) => e.preventDefault()}>
       <input
         type="text"
         placeholder="Search"
@@ -30,7 +33,6 @@ export default function SearchBox() {
         onChange={(e) => setValue(e.target.value)}
         aria-label="Search for an artist or track"
       />
-      <button type="submit">GO</button>
     </form>
   )
 }

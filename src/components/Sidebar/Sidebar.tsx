@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { logout, openAuthModal } from '../../features/auth/authSlice'
 import { HeartIcon, HomeIcon, LibraryIcon } from '../icons/Icons'
@@ -15,7 +15,7 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo">
+      <Link to="/" className="sidebar-logo">
         <svg viewBox="0 0 24 24" fill="#fff" width="34" height="34">
           <circle cx="12" cy="12" r="12" fill="#fff" />
           <path
@@ -24,7 +24,7 @@ export default function Sidebar() {
           />
         </svg>
         <span>Spotify</span>
-      </div>
+      </Link>
 
       <nav className="sidebar-nav">
         <NavLink to="/" end className={navLinkClass}>

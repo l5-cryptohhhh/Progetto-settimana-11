@@ -1,8 +1,22 @@
 .main-content {
+  position: relative;
   flex: 1;
   overflow-y: auto;
-  background: linear-gradient(160deg, #0d1b2a 0%, #1c2c40 35%, #37506a 100%);
   min-width: 0;
+}
+
+.main-content-bg {
+  position: fixed;
+  inset: 0;
+  left: var(--sidebar-width);
+  bottom: var(--player-height);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.main-content-inner {
+  position: relative;
+  z-index: 1;
   padding-bottom: 30px;
 }
 
