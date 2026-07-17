@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import { searchItunesTracks } from '../../api/itunes'
@@ -43,24 +43,35 @@ export default function PlaylistPage() {
     setIsEditingName(false)
   }
 
-  async function handleSearch(e: FormEvent) {
-    e.preventDefault()
+  useEffect(() => {
     const term = query.trim()
-    if (!term) return
-    setIsSearching(true)
-    try {
-      const tracks = await searchItunesTracks(term, 20)
-      setResults(tracks)
-    } catch {
-      try {
-        setResults(await searchDeezerTracks(term))
-      } catch {
-        setResults([])
-      }
-    } finally {
+    if (!term) {
+      setResults([])
       setIsSearching(false)
+      return
     }
-  }
+    setIsSearching(true)
+    let cancelled = false
+    const timer = setTimeout(async () => {
+      try {
+        const tracks = await searchItunesTracks(term, 20)
+        if (!cancelled) setResults(tracks)
+      } catch {
+        try {
+          const tracks = await searchDeezerTracks(term)
+          if (!cancelled) setResults(tracks)
+        } catch {
+          if (!cancelled) setResults([])
+        }
+      } finally {
+        if (!cancelled) setIsSearching(false)
+      }
+    }, 350)
+    return () => {
+      cancelled = true
+      clearTimeout(timer)
+    }
+  }, [query])
 
   function handleDelete() {
     if (!id) return
@@ -104,27 +115,26 @@ export default function PlaylistPage() {
       <Section
         title="Brani"
         tracks={playlist.tracks}
-        layout="grid"
+        layout="list"
         onRemove={(t) => dispatch(removeTrackFromPlaylist({ playlistId: id, trackId: t.id }))}
       />
 
       <section className="section">
         <h2 className="section-title">Aggiungi canzoni</h2>
-        <form className="playlist-add-search" onSubmit={handleSearch}>
+        <form className="playlist-add-search" onSubmit={(e) => e.preventDefault()}>
           <input
             type="text"
             placeholder="Cerca un brano o un artista"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button type="submit">GO</button>
         </form>
         {isSearching && <p className="main-content-empty">Ricerca in corso…</p>}
         {!isSearching && results.length > 0 && (
           <Section
             title=""
             tracks={results}
-            layout="grid"
+            layout="list"
             onAdd={(t) => dispatch(addTrackToPlaylist({ playlistId: id, track: t }))}
           />
         )}

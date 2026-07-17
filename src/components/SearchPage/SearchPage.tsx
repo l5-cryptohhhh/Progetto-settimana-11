@@ -43,7 +43,7 @@ export default function SearchPage() {
           title="Search Results"
           tracks={search.results}
           isLoading={search.status === 'loading'}
-          layout="grid"
+          layout="list"
         />
       )}
       {hasQuery && search.status === 'succeeded' && search.results.length === 0 && (

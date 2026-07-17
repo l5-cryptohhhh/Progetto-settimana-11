@@ -10,7 +10,7 @@ export default function FavoritesPage() {
       {tracks.length === 0 ? (
         <p className="main-content-empty">No favorites yet. Tap the heart on a track to save it here.</p>
       ) : (
-        <Section title="Preferiti" tracks={tracks} layout="grid" />
+        <Section title="Preferiti" tracks={tracks} layout="list" />
       )}
     </PageShell>
   )
