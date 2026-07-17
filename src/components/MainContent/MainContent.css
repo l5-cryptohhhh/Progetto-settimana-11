@@ -1,0 +1,13 @@
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  background: linear-gradient(160deg, #0d1b2a 0%, #1c2c40 35%, #37506a 100%);
+  min-width: 0;
+  padding-bottom: 30px;
+}
+
+.main-content-empty {
+  padding: 0 40px 20px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}

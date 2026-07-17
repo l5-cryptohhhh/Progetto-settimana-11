@@ -1,0 +1,35 @@
+.search-box {
+  display: flex;
+  margin: 18px 24px 0;
+  gap: 6px;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  border-radius: 3px;
+  padding: 8px 10px;
+  font-size: 0.8rem;
+  background: #fff;
+  color: #000;
+}
+
+.search-box input:focus {
+  outline: 2px solid var(--accent);
+}
+
+.search-box button {
+  border: none;
+  border-radius: 3px;
+  padding: 0 14px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  background: #2a2a2a;
+  color: #fff;
+}
+
+.search-box button:hover {
+  background: #3a3a3a;
+}

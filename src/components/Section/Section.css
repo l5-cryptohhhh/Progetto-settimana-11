@@ -1,0 +1,57 @@
+.section {
+  padding: 30px 40px 10px;
+}
+
+.section-title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin: 0 0 22px;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 30px 24px;
+}
+
+.section-row {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 6px;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+
+.section-row > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+.section-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.section-skeleton {
+  width: 150px;
+  height: 150px;
+  border-radius: 4px;
+  background: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0.05) 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.05) 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 200% 0;
+  }
+  to {
+    background-position: -200% 0;
+  }
+}
